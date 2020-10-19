@@ -1,2 +1,23 @@
-test.txt
+i# Python Specifics
+venv
+__pycache__
+
+# Editor & OS
+.DS_Store
+*.swp
+
+# Media & Static
+media/*
+!media/.gitkeep
+static/*
+!static/.gitkeep
+
+# Data
+db.sqlite3
+
+# Secrets
+service-account-key.json
+app.yaml
+.env
+.env-common
 
