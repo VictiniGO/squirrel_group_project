@@ -7,7 +7,7 @@ class SquirrelDetails(models.Model):
             null=True)
 
     Longitude = models.DecimalField(
-            max_digits=15, 
+            max_digits=15,
             decimal_places=10,
             null=True)
 

@@ -1,28 +1,25 @@
 from django.core.management.base import BaseCommand, CommandError
 from squirrelapp.models import SquirrelDetails
+from datetime import datetime
 import csv
 import json
 
 class Command(BaseCommand):
-
     help = 'Import squirrel file'
-
     def add_arguments(self, parser):
         parser.add_argument('squirrel_data', help="file containing squirrel details")
-    
     def handle(self, *args, **options):
         file_=options['squirrel_data']
-        
         with open(file_) as fp:
             reader=csv.DictReader(fp)
             for line in reader:
                 obj = SquirrelDetails()
                 obj.Latitude = line['X']
-                obj.Logitude = line['Y']
+                obj.Longitude = line['Y']
                 obj.Unique_Squirrel_ID= line['Unique Squirrel ID']
                 obj.Hectare=line['Hectare']
                 obj.Shift=line['Shift']
-                obj.Date=line['Date']
+                obj.Date=datetime.strptime(line['Date'], '%m%d%Y').date()
                 obj.Hectare_Squirrel_Number=line['Hectare Squirrel Number']
                 obj.Age=line['Age']
                 obj.Primary_Fur_Color=line['Primary Fur Color']
@@ -51,4 +48,4 @@ class Command(BaseCommand):
                 obj.save()
         
         msg=f'You are importing from {file_}'
-        self.stdout.write(self.style.SUCCESS(msg))
+        self.stdout.write(self.style.SUCCESS(msg))                                                           
