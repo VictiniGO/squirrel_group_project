@@ -1,4 +1,38 @@
-<!doctype html>
-<html>
-	<body>Map</body>
-</html>
+
+{% extends 'squirrel/base.html' %}
+
+{% load static %}
+
+{% block title %} - All Squirrel Sightings{% endblock %}
+
+{% block main %}
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        {% for sighting in sightings %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <p class="card-text">
+                <div class="pet-name">
+                  <strong>{{ sighting.Unique_Squirrel_ID }}</strong>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">This squirrel is spotted on</span>
+                  <span>
+                    {{ sighting.Date }}
+                  </span>
+                </div>
+              </p>
+          <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'squirrelapp:update' sighting.Unique_Squirrel_ID %}">Edit</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

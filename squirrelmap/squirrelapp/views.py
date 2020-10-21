@@ -12,8 +12,18 @@ def map(request):
     }
     return render(request,'squirrelapp/map.html',context)
 
-def sightingslist(request):
-    return render(request,'squirrelapp/sightings.html',{})
+def index(request):
+    sightings = SquirrelDetails.objects.all()
+    context = {
+            'sightings': sightings,
+    }
+    return render(request,'squirrelapp/index.html',context)
+
+def update(request):
+    sighting = get_object_or_404(SquirrelDetails, pk=Unique_Squirrel_ID)
+    context = {
+            'sighting' = sighting,
+    return render(request,'squirrelapp/update.html',context)
 
 def sightingsadd(request):
     return render(request,'squirrelapp/sightingsadd.html',{})
