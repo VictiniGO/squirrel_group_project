@@ -19,10 +19,11 @@ def index(request):
     }
     return render(request,'squirrelapp/index.html',context)
 
-def update(request):
-    sighting = get_object_or_404(SquirrelDetails, pk=Unique_Squirrel_ID)
+def update(request, squirrel_id):
+    sighting = get_object_or_404(SquirrelDetails, pk=squirrel_id)
     context = {
-            'sighting' = sighting,
+            'sighting': sighting,
+    }
     return render(request,'squirrelapp/update.html',context)
 
 def sightingsadd(request):
