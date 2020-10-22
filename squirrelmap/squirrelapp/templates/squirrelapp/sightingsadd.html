@@ -1,4 +1,28 @@
 <!doctype html>
 <html>
-	<body>Add</body>
+  <form action="{% url 'squirrelapp:add' %}" method="post">
+    {% csrf_token %}
+    
+    <label for="Latitude">Latitude </label>
+    <input type="number" name="Latitude" id="Latitude" step="0.000000001"><br><br>
+    <label for="Longitude">Longitude </label>
+    <input type="number" name="Longitude" id="Longitude" step="0.000000001"><br><br>
+    <label for="Unique_Squirrel_ID">Unique Squirrel ID </label>
+    <input type="text" name="Unique_Squirrel_ID" id="Unique_Squirrel_ID"><br><br>
+    <label for="Shift">Shift </label>
+    <select id="Shift" name="Shift">
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </select><br><br>
+    <label for="Date">Date </label>
+    <input type="date" name="Date" id="Date"><br><br>
+    <label for="Age">Age </label>
+    <select id="Age" name="Age">
+      <option value="Adult">Adult</option>
+      <option value="Juvenile">Juvenile</option>
+      <option value="None"></option>
+    </select><br><br>
+    
+    <input type="submit" value="OK">
+  </form>
 </html>

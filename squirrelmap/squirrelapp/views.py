@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render, get_object_or_404
 
+from .forms import SquirrelRequestForm
 from .models import SquirrelDetails
 
 
@@ -27,6 +28,21 @@ def update(request, squirrel_id):
     return render(request,'squirrelapp/update.html',context)
 
 def sightingsadd(request):
+    if request.method == 'POST':
+        form = SquirrelRequestForm(request.POST)
+
+        if form.is_valid():
+            form.Latitude = form.cleaned_data['Latitude']
+            form.Longitude = form.cleaned_data['Longitude']
+            form.Unique_Squirrel_ID = form.cleaned_data['Unique_Squirrel_ID']
+            form.Shift = form.cleaned_data['Shift']
+            form.Age = form.cleaned_data['Age']
+
+            form.save()
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
+    else:
+        form = SquirrelRequestForm()
     return render(request,'squirrelapp/sightingsadd.html',{})
 
 def sightingsstats(request):
