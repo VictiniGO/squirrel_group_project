@@ -43,8 +43,9 @@ def sightingsadd(request):
             return JsonResponse({'errors': form.errors}, status=400)
     else:
         form = SquirrelRequestForm()
-    return render(request,'squirrelapp/sightingsadd.html',{})
+    return render(request,'squirrelapp/sightingsadd.html',{'form':form})
 
 def sightingsstats(request):
+    counts = SquirrelDetails.objects.count()
     return render(request,'squirrelapp/sightingsstats.html',{})
    
