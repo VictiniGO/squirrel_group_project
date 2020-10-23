@@ -6,6 +6,16 @@
 {% block title %} - All Squirrel Sightings{% endblock %}
 
 {% block main %}
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Squirrel Tracker</h1>
+        <p class="lead text-muted">Here is a place where you can add, update and view squirrel data. Avoiding squirrels becomes a doddle for you now! </p >
+      <p>
+        <a href="{% url 'squirrelapp:add' %}" class="btn btn-primary my-2">Create A New Sighting</a >
+        <a href="{% url 'squirrelapp:stats' %}" class="btn btn-secondary my-2">Sightings Statistics</a >
+      </p >
+    </div>
+  </section>
   <div class="album py-5 bg-light">
     <div class="container">
 
