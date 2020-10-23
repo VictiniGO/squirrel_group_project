@@ -1,4 +1,105 @@
-<!doctype html>
-<html>
-        <body>Update</body>
-</html>
+{% extends 'squirrelapp/base.html' %}
+
+{% load static %}
+
+{% block title %} - {{sighting.Unique_Squirrel_ID }}{% endblock %}
+
+{% block main %}
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+        <form id="update_sighting" method="post" action="{% url 'squirrelapp:request' sighting.Unique_Squirrel_ID %}", class="input-group mb-3">
+          {% csrf_token %}
+
+            <input type="hidden" name="next" value="{{ request.path }}">
+
+            <label for="Latitude">Latitude </label>
+            <input type="number" name="Latitude" id="Latitude" step="0.000000001"><br><br>
+
+            <label for="Longitude">Longitude </label>
+            <input type="number" name="Longitude" id="Longitude" step="0.000000001"><br><br>
+
+            <label for="Unique_Squirrel_ID">Unique Squirrel ID </label>
+            <input type="text" name="Unique_Squirrel_ID" id="Unique_Squirrel_ID"><br><br>
+
+            <label for="Shift">Shift </label>
+            <select id="Shift" name="Shift">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+            </select><br><br>
+ 
+            <label for="Date">Date </label>
+            <input type="date" name="Date" id="Date"><br><br>
+            
+            <label for="Age">Age </label>
+            <select id="Age" name="Age">
+            <option value="Adult">Adult</option>
+            <option value="Juvenile">Juvenile</option>
+            <option value="None"></option>
+            </select><br><br>
+    
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">Update</button>
+            </div>
+        <div id="errors" class="mb-3"></div>
+        </form>
+        </div>
+
+        
+        <div class="col-md-8">
+          <div class="card mb-8 shadow-sm">
+            <div class="card-body">
+              <p class="card-text">
+                <div class="squirrel-id">
+			<strong>{{ sighting.Unique_Squirrel_ID}}</strong>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Latitude:</span>
+                  <span>
+                    {{ sighting.Latitude }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Longitude:</span>
+                  <span>
+                    {{ sighting.Longitude }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Unique Squirrel ID:</span>
+                  <span>
+                    {{ sighting.Unique_Squirrel_ID }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Shift:</span>
+                  <span>
+                    {{ sighting.Shift }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Date:</span>
+                  <span>
+                    {{ sighting.Date }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Age:</span>
+                  <span>
+                    {{ sighting.Age }}
+                  </span>
+                </div>
+
+              </p>
+            </div>
+          </div>
+        </div>
+                           
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block extra_footer %}
+   
+{% endblock %}

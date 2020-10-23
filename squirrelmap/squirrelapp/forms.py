@@ -8,6 +8,17 @@ class SquirrelRequestForm(ModelForm):
                 'Longitude',
                 'Unique_Squirrel_ID',
                 'Shift',
-                'Date',
+                'Date', 
                 'Age',
-        ] 
+        ]
+class LatiForm(ModelForm):
+    class Meta:
+        model = SquirrelDetails
+        fields = [
+            'Latitude',
+            'Longitude',
+            'Unique_Squirrel_ID',
+            'Shift',
+            'Date',
+            'Age',
+        ]
