@@ -1,6 +1,6 @@
 # Python Specifics
 venv
-__pycache__
+__pycache__/
 
 # Editor & OS
 .DS_Store
