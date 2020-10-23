@@ -1,8 +1,5 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.http import JsonResponse
+from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.db.models import Avg, Max, FloatField, Count, Q
 
@@ -36,14 +33,19 @@ def update_lati(request, squirrel_id):
         form = LatiForm(request.POST or None,
                         request.FILES or None, instance=sighting)
         if form.is_valid():
-             form.save()
-             context = {
-                     'form': form,
-            }
+            form.Latitude = form.cleaned_data['Latitude']
+            form.Longitude = form.cleaned_data['Longitude']
+            form.Shift = form.cleaned_data['Shift']
+            form.Date = form.cleaned_data['Date']
+            form.Age = form.cleaned_data['Age']
+            form.save()
+            context = {'form': form}
         next = request.POST.get('next', '/')
         return HttpResponseRedirect(next) 
     else:
         return JsonResponse({'errors': form.errors}, status=400)
+    
+    return render(request,'squirrelapp/update.html',context)
 
 def sightingsadd(request):
     if request.method == 'POST':
@@ -53,7 +55,6 @@ def sightingsadd(request):
             form.Longitude = form.cleaned_data['Longitude']
             form.Unique_Squirrel_ID = form.cleaned_data['Unique_Squirrel_ID']
             form.Shift = form.cleaned_data['Shift']
-            form.Date = form.cleaned_data['Date']
             form.Age = form.cleaned_data['Age']
             form.save()
         else:
